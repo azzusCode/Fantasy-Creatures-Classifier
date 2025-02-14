@@ -5,12 +5,30 @@ layout: page
 
 <h1>Fantasy Creatures Classifier</h1>
 <input id="photo" type="file" accept="image/*">
-<button id="classifyButton">Classify Image</button>
+<br>
+<img id="preview" style="max-width: 300px; margin-top: 10px; display: none;">
+<br>
+<button id="submitButton" style="display: none;">Submit for Prediction</button>
 <p id="results">Result will appear here...</p>
 
 <script type="module">
     import { Client } from "https://cdn.jsdelivr.net/npm/@gradio/client/+esm";
 
+    // Function to preview the image
+    function previewImage() {
+        const inputElement = document.getElementById('photo');
+        const file = inputElement.files[0];
+        
+        if (file) {
+            // Use URL.createObjectURL for better compatibility
+            const preview = document.getElementById('preview');
+            preview.src = URL.createObjectURL(file);
+            preview.style.display = 'block';
+            document.getElementById('submitButton').style.display = 'inline-block';
+        }
+    }
+
+    // Function to classify the image
     async function classifyImage() {
         const inputElement = document.getElementById('photo');
         const file = inputElement.files[0];
@@ -30,10 +48,17 @@ layout: page
             image: blob, 
         });
 
-        // Display the result
-        document.getElementById('results').innerText = `Prediction: ${result.data}`;
+        // Display the result more clearly
+        console.log(result); // Check the structure of the result
+
+        // Assuming the result is in result.data.label or similar (adjust based on model response)
+        const prediction = JSON.stringify(result.data, null, 2); 
+        document.getElementById('results').innerText = `Prediction: ${prediction}`;
     }
 
-    // Event Listener for Button
-    document.getElementById('classifyButton').addEventListener('click', classifyImage);
+    // Event listener for file input change
+    document.getElementById('photo').addEventListener('change', previewImage);
+
+    // Event listener for submit button
+    document.getElementById('submitButton').addEventListener('click', classifyImage);
 </script>
