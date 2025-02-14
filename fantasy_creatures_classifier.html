@@ -3,13 +3,16 @@ title: Fantasy Creatures Classifier
 layout: page
 ---
 
-<input id="photo" type="file">
-<div id="results"></div>
+<h1>Fantasy Creatures Classifier</h1>
+<input id="photo" type="file" accept="image/*">
+<button id="classifyButton">Classify Image</button>
+<p id="results">Result will appear here...</p>
+
 <script type="module">
     import { Client } from "https://cdn.jsdelivr.net/npm/@gradio/client/+esm";
 
     async function classifyImage() {
-        const inputElement = document.getElementById('imageInput');
+        const inputElement = document.getElementById('photo');
         const file = inputElement.files[0];
 
         if (!file) {
@@ -18,8 +21,8 @@ layout: page
         }
 
         // Convert file to Blob
-        const exampleImage = await file.arrayBuffer();
-        const blob = new Blob([exampleImage], { type: file.type });
+        const arrayBuffer = await file.arrayBuffer();
+        const blob = new Blob([arrayBuffer], { type: file.type });
 
         // Connect to the model
         const client = await Client.connect("azzusCode/fantasy-creatures-classifier");
@@ -28,6 +31,9 @@ layout: page
         });
 
         // Display the result
-        document.getElementById('result').innerText = `Prediction: ${result.data}`;
+        document.getElementById('results').innerText = `Prediction: ${result.data}`;
     }
+
+    // Event Listener for Button
+    document.getElementById('classifyButton').addEventListener('click', classifyImage);
 </script>
