@@ -3,7 +3,6 @@ title: Fantasy Creatures Classifier
 layout: page
 ---
 
-<h1>Fantasy Creatures Classifier</h1>
 <input id="photo" type="file" accept="image/*">
 <br>
 <img id="preview" style="max-width: 300px; margin-top: 10px; display: none;">
@@ -48,12 +47,14 @@ layout: page
             image: blob, 
         });
 
-        // Display the result more clearly
-        console.log(result); // Check the structure of the result
+        // Extract the label with the highest confidence
+        const predictions = result.data[0].confidences;
+        const highestConfidence = predictions.reduce((max, current) => 
+            current.confidence > max.confidence ? current : max
+        );
 
-        // Assuming the result is in result.data.label or similar (adjust based on model response)
-        const prediction = JSON.stringify(result.data, null, 2); 
-        document.getElementById('results').innerText = `Prediction: ${prediction}`;
+        // Display the most confident label
+        document.getElementById('results').innerText = `Prediction: ${highestConfidence.label}`;
     }
 
     // Event listener for file input change
