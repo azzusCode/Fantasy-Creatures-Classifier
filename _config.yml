@@ -1,4 +1,4 @@
-remote_theme: LeNPaul/Millennial@gh-pages
+remote_theme: daviddarnes/alembic@main
 plugins:
 - jekyll-remote-theme
 
