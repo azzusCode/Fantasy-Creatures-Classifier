@@ -8,6 +8,7 @@ layout: page
 <img id="preview" style="max-width: 300px; margin-top: 10px; display: none;">
 <br>
 <button id="submitButton" style="display: none;">Submit for Prediction</button>
+<p id="processing" style="display: none; color: blue;">Processing... Please wait.</p>
 <p id="results">Result will appear here...</p>
 
 <script type="module">
@@ -37,6 +38,11 @@ layout: page
             return;
         }
 
+        // Show the processing message
+        const processingMessage = document.getElementById('processing');
+        processingMessage.style.display = 'block';
+        document.getElementById('results').innerText = '';
+
         // Convert file to Blob
         const arrayBuffer = await file.arrayBuffer();
         const blob = new Blob([arrayBuffer], { type: file.type });
@@ -52,6 +58,9 @@ layout: page
         const highestConfidence = predictions.reduce((max, current) => 
             current.confidence > max.confidence ? current : max
         );
+
+        // Hide the processing message
+        processingMessage.style.display = 'none';
 
         // Display the most confident label
         document.getElementById('results').innerText = `Prediction: ${highestConfidence.label}`;
