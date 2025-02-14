@@ -5,35 +5,29 @@ layout: page
 
 <input id="photo" type="file">
 <div id="results"></div>
-<script>
-    async function loaded(reader) {
-        try {
-            const response = await fetch("https://azzusCode-fantasy-creatures-classifier.hf.space", {
-                method: "POST", 
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ data: [reader.result] })
-            });
+<script type="module">
+    import { Client } from "https://cdn.jsdelivr.net/npm/@gradio/client/+esm";
 
-            // Check if response is OK
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
+    async function classifyImage() {
+        const inputElement = document.getElementById('imageInput');
+        const file = inputElement.files[0];
 
-            const json = await response.json();
-            console.log("Response JSON:", json); // Debugging line to check response
-            const label = json['data'][0]['label'];
-            results.innerHTML = `<br/> <img src="${reader.result}" width="500"> <p>${label}</p>`;
-        } catch (error) {
-            console.error("Error:", error);
-            results.innerHTML = `<p style="color:red;">Error: ${error.message}</p>`;
+        if (!file) {
+            alert("Please select an image first.");
+            return;
         }
-    }
 
-    function read() {
-        const reader = new FileReader();
-        reader.addEventListener('load', () => loaded(reader));
-        reader.readAsDataURL(photo.files[0]);
-    }
+        // Convert file to Blob
+        const exampleImage = await file.arrayBuffer();
+        const blob = new Blob([exampleImage], { type: file.type });
 
-    photo.addEventListener('input', read);
+        // Connect to the model
+        const client = await Client.connect("azzusCode/fantasy-creatures-classifier");
+        const result = await client.predict("/predict", { 
+            image: blob, 
+        });
+
+        // Display the result
+        document.getElementById('result').innerText = `Prediction: ${result.data}`;
+    }
 </script>
