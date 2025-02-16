@@ -3,7 +3,7 @@ plugins:
   - jekyll-remote-theme
 
 title: Fantasy Creatures Classifier
-description: An image classification API that classifies 30 different types of fantasy creatures.
+description: "An image classification API that classifies 30 different types of fantasy creatures. <br> &copy; {{ site.time | date: '%Y' }} Md. Abidul Mohaimin"
 
 author:
   name: Md. Abidul Mohaimin
@@ -13,6 +13,3 @@ navigation:
     url: /Fantasy-Creatures-Classifier
   - text: Test The Classifier 
     url: /Fantasy-Creatures-Classifier/fantasy_creatures_classifier.html
-
-footer_text: "&copy; {{ site.time | date: '%Y' }} Md. Abidul Mohaimin"
-
