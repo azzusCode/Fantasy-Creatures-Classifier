@@ -1,4 +1,4 @@
-remote_theme: niklasbuschmann/contrast@v2.1
+remote_theme: bencentra/centrarium@master
 plugins:
 - jekyll-remote-theme
 
