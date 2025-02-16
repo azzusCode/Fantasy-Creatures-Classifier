@@ -1,5 +1,5 @@
 ---
-title: home
+title: Title Index
 layout: page
 ---
 
@@ -35,6 +35,3 @@ The types are following: <br/>
 28. Wizard  
 29. Wraith  
 30. Zombie
-
-[About the Classifier](fantasy_creatures_classifier.html)
-
