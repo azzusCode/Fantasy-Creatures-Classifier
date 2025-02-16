@@ -3,6 +3,8 @@ title: Home
 layout: page
 ---
 
+[About the Classifier](fantasy_creatures_classifier.html)
+
 # Fantasy Creatures Classifier 
 Can classify 30 different types of fantasy creatures <br/>
 The types are following: <br/>
