@@ -1,4 +1,4 @@
-remote_theme: pages-themes/architect@main
+remote_theme: wowthemesnet/mediumish-theme-jekyll@master
 plugins:
 - jekyll-remote-theme
 
