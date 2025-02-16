@@ -1,4 +1,4 @@
-remote_theme: bencentra/centrarium@master
+remote_theme: JustGoodThemes/Scriptor-Jekyll-Theme@master
 plugins:
 - jekyll-remote-theme
 
