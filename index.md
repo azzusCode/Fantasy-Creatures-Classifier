@@ -1,8 +1,8 @@
 ---
+title: home
 layout: page
 ---
 
-# Fantasy Creatures Classifier 
 Can classify 30 different types of fantasy creatures <br/>
 The types are following: <br/>
 1. Angel  
