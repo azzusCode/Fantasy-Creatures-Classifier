@@ -1,4 +1,4 @@
-remote_theme: brianmaierjr/long-haul@master
+remote_theme: niklasbuschmann/contrast@master
 plugins:
 - jekyll-remote-theme
 
