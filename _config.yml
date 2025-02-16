@@ -2,7 +2,7 @@ remote_theme: JustGoodThemes/Scriptor-Jekyll-Theme@master
 plugins:
   - jekyll-remote-theme
 
-title: Tittle YML
+title: Fantasy Creatures Classifier
 description: An image classification API that classifies 30 different types of fantasy creatures.
 
 author:
@@ -10,6 +10,6 @@ author:
 
 navigation:
   - text: Home
-    url: /
+    url: /Fantasy-Creatures-Classifier
   - text: Test The Classifier 
-    url: /fantasy_creatures_classifier.html
+    url: /Fantasy-Creatures-Classifier/fantasy_creatures_classifier.html
