@@ -13,3 +13,6 @@ navigation:
     url: /Fantasy-Creatures-Classifier
   - text: Test The Classifier 
     url: /Fantasy-Creatures-Classifier/fantasy_creatures_classifier.html
+
+footer_text: "&copy; {{ site.time | date: '%Y' }} Md. Abidul Mohaimin"
+

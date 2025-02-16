@@ -3,8 +3,8 @@ title: About The Classifier
 layout: page
 ---
 
-It Can classify 30 different types of fantasy creatures <br/>
-The types are following: <br/>
+It can classify 30 different types of fantasy creatures <br/>
+The types are the followings: <br/>
 1. Angel  
 2. Basilisk  
 3. Centaur  
