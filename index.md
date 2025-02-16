@@ -3,8 +3,6 @@ title: Home
 layout: page
 ---
 
-[About the Classifier](fantasy_creatures_classifier.html)
-
 # Fantasy Creatures Classifier 
 Can classify 30 different types of fantasy creatures <br/>
 The types are following: <br/>
@@ -38,3 +36,6 @@ The types are following: <br/>
 28. Wizard  
 29. Wraith  
 30. Zombie
+
+[About the Classifier](fantasy_creatures_classifier.html)
+
