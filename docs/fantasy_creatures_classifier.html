@@ -1,0 +1,74 @@
+---
+title: Test The Classifier
+layout: page
+---
+
+<input id="photo" type="file" accept="image/*">
+<br>
+<img id="preview" style="max-width: 300px; margin-top: 10px; display: none;">
+<br>
+<button id="submitButton" style="display: none;">Submit for Prediction</button>
+<p id="processing" style="display: none; color: blue;">Processing... Please wait.</p>
+<p id="results">Result will appear here...</p>
+
+<script type="module">
+    import { Client } from "https://cdn.jsdelivr.net/npm/@gradio/client/+esm";
+
+    // Function to preview the image
+    function previewImage() {
+        const inputElement = document.getElementById('photo');
+        const file = inputElement.files[0];
+        
+        if (file) {
+            // Use URL.createObjectURL for better compatibility
+            const preview = document.getElementById('preview');
+            preview.src = URL.createObjectURL(file);
+            preview.style.display = 'block';
+            document.getElementById('submitButton').style.display = 'inline-block';
+        }
+    }
+
+    // Function to classify the image
+    async function classifyImage() {
+        const inputElement = document.getElementById('photo');
+        const file = inputElement.files[0];
+
+        if (!file) {
+            alert("Please select an image first.");
+            return;
+        }
+
+        // Show the processing message
+        const processingMessage = document.getElementById('processing');
+        processingMessage.style.display = 'block';
+        document.getElementById('results').innerText = '';
+
+        // Convert file to Blob
+        const arrayBuffer = await file.arrayBuffer();
+        const blob = new Blob([arrayBuffer], { type: file.type });
+
+        // Connect to the model
+        const client = await Client.connect("azzusCode/fantasy-creatures-classifier");
+        const result = await client.predict("/predict", { 
+            image: blob, 
+        });
+
+        // Extract the label with the highest confidence
+        const predictions = result.data[0].confidences;
+        const highestConfidence = predictions.reduce((max, current) => 
+            current.confidence > max.confidence ? current : max
+        );
+
+        // Hide the processing message
+        processingMessage.style.display = 'none';
+
+        // Display the most confident label
+        document.getElementById('results').innerText = `Prediction: ${highestConfidence.label}`;
+    }
+
+    // Event listener for file input change
+    document.getElementById('photo').addEventListener('change', previewImage);
+
+    // Event listener for submit button
+    document.getElementById('submitButton').addEventListener('click', classifyImage);
+</script>
